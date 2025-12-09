@@ -1,0 +1,191 @@
+<div class="container mx-auto mb-8 px-4 py-8">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">Registrar Nueva Mascota</h1>
+    <div th:if="${success}" class="mb-5 p-4 bg-teal-50 border border-teal-500 rounded-lg">
+        <div class="flex items-center">
+            <svg class="shrink-0 size-5 text-teal-500 mr-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <p class="text-sm text-teal-600" th:text="${successMessage}"></p>
+        </div>
+    </div>
+
+    <div th:if="${error}" class="mb-5 p-4 bg-red-50 border border-red-500 rounded-lg">
+        <div class="flex items-center">
+            <svg class="shrink-0 size-5 text-red-500 mr-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" x2="12" y1="8" y2="12"></line>
+                <line x1="12" x2="12.01" y1="16" y2="16"></line>
+            </svg>
+            <p class="text-sm text-red-600" th:text="${errorMessage}"></p>
+        </div>
+    </div>
+    <form th:action="@{/mascota/c}" th:object="${mascotaDTO}" method="POST" enctype="multipart/form-data"
+        class="max-w-sm mx-auto space-y-4">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <div>
+            <label for="nombre" class="block text-sm font-medium mb-2 text-gray-900">Nombre</label>
+            <div class="relative">
+                <input type="text" id="nombre" th:field="*{nombre}"
+                    th:class="${#fields.hasErrors('nombre')} ? 'py-2.5 sm:py-3 px-4 pl-10 block w-full border-red-500 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 bg-white text-gray-900' : 'py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-white text-gray-900'"
+                    placeholder="Nombre de la mascota">
+                <div th:if="${#fields.hasErrors('nombre')}"
+                    class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('nombre')}" class="text-sm text-red-600 mt-2" th:errors="*{nombre}"></p>
+        </div>
+
+        <div>
+            <label for="especie" class="block text-sm font-medium mb-2 text-gray-900">Especie</label>
+            <div class="relative">
+                <input type="text" id="especie" th:field="*{especie}"
+                    th:class="${#fields.hasErrors('especie')} ? 'py-2.5 sm:py-3 px-4 pl-10 block w-full border-red-500 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 bg-white text-gray-900' : 'py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-white text-gray-900'"
+                    placeholder="Perro, Gato, etc.">
+                <div th:if="${#fields.hasErrors('especie')}"
+                    class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('especie')}" class="text-sm text-red-600 mt-2" th:errors="*{especie}"></p>
+        </div>
+
+        <div>
+            <label for="raza" class="block text-sm font-medium mb-2 text-gray-900">Raza</label>
+            <div class="relative">
+                <input type="text" id="raza" th:field="*{raza}"
+                    th:class="${#fields.hasErrors('raza')} ? 'py-2.5 sm:py-3 px-4 pl-10 block w-full border-red-500 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 bg-white text-gray-900' : 'py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-white text-gray-900'"
+                    placeholder="Labrador, Siamés, etc.">
+                <div th:if="${#fields.hasErrors('raza')}"
+                    class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('raza')}" class="text-sm text-red-600 mt-2" th:errors="*{raza}"></p>
+        </div>
+
+        <div>
+            <label for="edad" class="block text-sm font-medium mb-2 text-gray-900">Edad (años)</label>
+            <div class="relative">
+                <input type="number" id="edad" th:field="*{edad}"
+                    th:class="${#fields.hasErrors('edad')} ? 'py-2.5 sm:py-3 px-4 pl-10 block w-full border-red-500 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 bg-white text-gray-900' : 'py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-white text-gray-900'"
+                    placeholder="Ej: 2" min="0" max="50">
+                <div th:if="${#fields.hasErrors('edad')}"
+                    class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('edad')}" class="text-sm text-red-600 mt-2" th:errors="*{edad}"></p>
+        </div>
+
+        <div>
+            <label for="peso" class="block text-sm font-medium mb-2 text-gray-900">Peso (kg)</label>
+            <div class="relative">
+                <input type="number" id="peso" th:field="*{peso}"
+                    th:class="${#fields.hasErrors('peso')} ? 'py-2.5 sm:py-3 px-4 pl-10 block w-full border-red-500 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 bg-white text-gray-900' : 'py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-white text-gray-900'"
+                    placeholder="Ej: 15" min="1" max="200">
+                <div th:if="${#fields.hasErrors('peso')}"
+                    class="absolute inset-y-0 start-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('peso')}" class="text-sm text-red-600 mt-2" th:errors="*{peso}"></p>
+        </div>
+
+        <div>
+            <label for="descripcion" class="block text-sm font-medium mb-2 text-gray-900">Descripción</label>
+            <div class="relative">
+                <textarea id="descripcion" th:field="*{descripcion}" rows="3"
+                    th:class="${#fields.hasErrors('descripcion')} ? 'py-2.5 sm:py-3 px-4 pl-10 block w-full border-red-500 rounded-lg text-sm focus:border-red-500 focus:ring-red-500 bg-white text-gray-900' : 'py-2.5 sm:py-3 px-4 block w-full border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 bg-white text-gray-900'"
+                    placeholder="Describe las características de la mascota..."></textarea>
+                <div th:if="${#fields.hasErrors('descripcion')}"
+                    class="absolute top-3 start-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="shrink-0 size-4 text-red-500" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="12" x2="12" y1="8" y2="12"></line>
+                        <line x1="12" x2="12.01" y1="16" y2="16"></line>
+                    </svg>
+                </div>
+            </div>
+            <p th:if="${#fields.hasErrors('descripcion')}" class="text-sm text-red-600 mt-2" th:errors="*{descripcion}">
+            </p>
+        </div>
+        <div>
+            <label for="imagenes" class="block text-sm font-medium mb-2 text-gray-900">Imágenes de la mascota</label>
+            <div
+                th:class="${#fields.hasErrors('imagenUrl')} ? 'flex flex-col items-center justify-center w-full h-40 border-2 border-red-500 border-dashed rounded-lg cursor-pointer bg-red-50 hover:bg-red-100 transition-colors' : 'flex flex-col items-center justify-center w-full h-40 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors'"
+                data-file-upload
+                data-file-input="imagenes"
+                data-file-list="file-list">
+                <input type="file" id="imagenes" name="imagenes" accept="image/*" multiple class="hidden">
+                <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                        </path>
+                    </svg>
+                    <p class="mb-2 text-sm text-gray-700">
+                        <span class="font-semibold">Haz clic para subir</span> o arrastra y suelta
+                    </p>
+                    <p class="text-xs text-gray-500">PNG, JPG o JPEG (MAX. 10MB cada una)</p>
+                </div>
+            </div>
+            <div id="file-list" class="mt-2 text-sm text-gray-600"></div>
+            <p th:if="${#fields.hasErrors('imagenUrl')}" class="text-sm text-red-600 mt-2" th:errors="*{imagenUrl}"></p>
+        </div>
+
+        <script th:src="@{/js/file-upload-handler.js}"></script>
+
+        <div class="pt-2">
+            <button type="submit"
+                class="w-full py-2.5 sm:py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none">
+                Crear mascota
+            </button>
+        </div>
+
+        <div class="text-center">
+            <a th:href="@{/mascota/r}"
+                class="text-sm text-gray-600 decoration-2 hover:underline focus:outline-none focus:underline font-medium">
+                Cancelar y volver al listado
+            </a>
+        </div>
+    </form>
+
+    <script th:src="@{/js/auto-ocultar-avisos.js}"></script>

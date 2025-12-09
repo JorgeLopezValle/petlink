@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "AdopcionMascotasApplication",
+            "request": "launch",
+            "mainClass": "com.petlink.adopcion_mascotas.AdopcionMascotasApplication",
+            "projectName": "adopcion-mascotas"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot App",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.petlink.adopcion_mascotas.AdopcionMascotasApplication",
+            "projectName": "adopcion-mascotas",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env",
+            "vmArgs": "-Dspring-boot.run.fork=false",
+            "preLaunchTask": "dev: start all",
+            "postDebugTask": null
+        }
+    ]
+}

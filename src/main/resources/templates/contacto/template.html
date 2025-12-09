@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${asunto}">Asunto</title>
+    <style type="text/css">
+        body,
+        table,
+        td,
+        a {
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+
+        table,
+        td {
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+        img {
+            -ms-interpolation-mode: bicubic;
+        }
+
+        img {
+            border: 0;
+            height: auto;
+            line-height: 100%;
+            outline: none;
+            text-decoration: none;
+        }
+
+        table {
+            border-collapse: collapse !important;
+        }
+
+        body {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            width: 100% !important;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f3f4f6;
+            color: #374151;
+        }
+
+        @media screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+
+            .content-padding {
+                padding: 20px !important;
+            }
+
+            .header-padding {
+                padding: 30px 20px !important;
+            }
+
+            h1 {
+                font-size: 24px !important;
+            }
+        }
+    </style>
+</head>
+
+<body style="margin: 0; padding: 0; background-color: #f3f4f6;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td align="center" style="padding: 40px 0;">
+                <table class="email-container" border="0" cellpadding="0" cellspacing="0" width="600"
+                    style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);">
+
+                    <tr>
+                        <td class="header-padding" align="center"
+                            style="background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%); padding: 40px;">
+                            <h1
+                                style="color: #ffffff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 32px; font-weight: 700; margin: 0; letter-spacing: -0.5px;">
+                                PetLink</h1>
+                            <p
+                                style="color: #e0e7ff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; margin: 10px 0 0 0; font-weight: 500;">
+                                Encuentra tu compañero perfecto</p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="content-padding" style="padding: 40px;">
+                            <h2
+                                style="color: #111827; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 20px; font-weight: 600; margin: 0 0 20px 0; line-height: 1.4;">
+                                <span
+                                    style="color: #6b7280; font-weight: 400; font-size: 16px; display: block; margin-bottom: 5px;">Asunto:</span>
+                                <span th:text="${asunto}">Asunto del mensaje</span>
+                            </h2>
+
+                            <div
+                                style="color: #374151; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 1.6; margin-bottom: 30px;">
+                                <p style="white-space: pre-wrap; margin: 0;" th:text="${mensaje}">Mensaje del
+                                    remitente...</p>
+                            </div>
+
+                            <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                style="background-color: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+                                <tr>
+                                    <td style="padding: 20px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                            <tr>
+                                                <td style="padding-bottom: 8px;">
+                                                    <p
+                                                        style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; color: #6b7280; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600;">
+                                                        Remitente</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-bottom: 4px;">
+                                                    <p style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #111827; font-weight: 600;"
+                                                        th:text="${nombre}">Nombre del Remitente</p>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <a th:href="'mailto:' + ${email}"
+                                                        style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; color: #2563eb; text-decoration: none;"
+                                                        th:text="${email}">email@ejemplo.com</a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <div th:if="${esProtectora}"
+                                style="margin-top: 25px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                                <table border="0" cellpadding="0" cellspacing="0">
+                                    <tr>
+                                        <td>
+                                            <p
+                                                style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; color: #6b7280; line-height: 1.5;">
+                                                Puedes responder directamente a este correo para contactar con <strong
+                                                    style="color: #374151;" th:text="${nombre}">el remitente</strong>.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td
+                            style="background-color: #f9fafb; padding: 30px; border-top: 1px solid #e5e7eb; text-align: center;">
+                            <p
+                                style="margin: 0 0 10px 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; color: #9ca3af;">
+                                &copy; 2025 PetLink. Todos los derechos reservados.
+                            </p>
+                            <p
+                                style="margin: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 12px; color: #9ca3af;">
+                                Este es un mensaje automático, por favor no respondas a este correo a menos que desees
+                                contactar con el remitente indicado arriba.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td style="height: 40px; font-size: 0; line-height: 0;">&nbsp;</td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

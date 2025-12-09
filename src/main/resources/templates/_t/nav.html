@@ -1,0 +1,157 @@
+<nav th:fragment="nav" class="bg-gradient-to-r from-blue-700 to-blue-900 text-white shadow-md">
+    <div class="container mx-auto px-4">
+        <div class="hidden md:flex md:items-center md:space-x-2 py-3 overflow-x-auto">
+            <a th:href="@{/}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Inicio
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/mascota/r}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Mascotas
+            </a>
+            <a th:if="${session.protectoraLogueada != null}" th:href="@{/mascota/r}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Mis Mascotas
+            </a>
+            <a th:if="${session.usuarioLogueado != null and session.rol != null and session.rol.name() == 'USUARIO'}" th:href="@{/mascota/mis-adopciones}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Mis Adopciones
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/usuario/r}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Usuarios
+            </a>
+            <a th:href="@{/protectora/r}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                    </path>
+                </svg>
+                Protectoras
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/protectora/pendientes}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Aprobar Protectoras
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/dashboard}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Dashboard
+            </a>
+            <a th:href="@{/contacto}"
+                class="nav-item flex items-center px-4 py-2 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200 whitespace-nowrap">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                    </path>
+                </svg>
+                Contacto
+            </a>
+        </div>
+
+        <div id="mobile-nav" class="md:hidden hidden py-3 space-y-2 border-t border-blue-600">
+            <a th:href="@{/}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                Inicio
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/mascota/r}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Mascotas
+            </a>
+            <a th:if="${session.protectoraLogueada != null}" th:href="@{/mascota/r}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Mis Mascotas
+            </a>
+            <a th:if="${session.usuarioLogueado != null and session.rol != null and session.rol.name() == 'USUARIO'}" th:href="@{/mascota/mis-adopciones}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+                Mis Adopciones
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/usuario/r}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+                Usuarios
+            </a>
+            <a th:href="@{/protectora/r}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                    </path>
+                </svg>
+                Protectoras
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/protectora/pendientes}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Aprobar Protectoras
+            </a>
+            <a th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:href="@{/dashboard}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Dashboard
+            </a>
+            <a th:href="@{/contacto}"
+                class="nav-item flex items-center px-4 py-3 text-sm font-medium hover:bg-blue-600 rounded-lg transition-all duration-200">
+                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                    </path>
+                </svg>
+                Contacto
+            </a>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,71 @@
+<div class="container mx-auto px-4 py-8">
+
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Protectoras</h1>
+            <p th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" class="text-gray-600 mt-1">Gestiona las protectoras registradas en el sistema</p>
+            <p th:unless="${session.rol != null and session.rol.name() == 'ADMIN'}" class="text-gray-600 mt-1">Explora las protectoras disponibles</p>
+        </div>
+        <form th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" th:action="@{/protectora/c}">
+            <button type="submit"
+                class="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm transition-all duration-200 hover:scale-105">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Nueva Protectora
+            </button>
+        </form>
+    </div>
+
+    <div class="mb-6 bg-white rounded-lg shadow-md p-6">
+        <label for="filtroProtectora" class="block text-sm font-semibold text-gray-900 mb-3">
+            <svg class="w-5 h-5 inline mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Buscar protectora
+        </label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                </svg>
+            </div>
+            <input type="text" id="filtroProtectora" placeholder="Nombre, ciudad, email, dirección..."
+                oninput="filtrarProtectora()"
+                class="w-full pl-12 pr-4 py-3 text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder:text-gray-400">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                <button type="button" onclick="limpiarFiltro()" id="btnLimpiar"
+                    class="hidden text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                    title="Limpiar filtro">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="resultadosContador" class="mt-3"></div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(protectoras)}" class="bg-white rounded-lg shadow-md p-12 text-center">
+        <svg class="w-20 h-20 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+        </svg>
+        <p class="text-xl font-semibold text-gray-700 mb-2">No hay protectoras registradas</p>
+        <p class="text-gray-500">Comienza agregando una nueva protectora</p>
+    </div>
+
+    <th:block th:if="${!#lists.isEmpty(protectoras)}">
+        <th:block th:if="${session.rol != null and session.rol.name() == 'ADMIN'}">
+            <div th:replace="~{protectora/tabla :: contenido}"></div>
+        </th:block>
+        <th:block th:unless="${session.rol != null and session.rol.name() == 'ADMIN'}">
+            <div th:replace="~{protectora/cards :: contenido}"></div>
+        </th:block>
+    </th:block>
+
+</div>
+
+<script th:src="@{/js/filtro-ciudad.js}"></script>

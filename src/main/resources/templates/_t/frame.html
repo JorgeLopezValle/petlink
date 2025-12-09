@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{_t/head :: head}"></head>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <div class="sticky top-0 z-50">
+    <header th:replace="~{_t/header :: header}"></header>
+
+    <nav th:replace="~{_t/nav :: nav}"></nav>
+  </div>
+
+  <main class="flex-grow p-6 pb-12" th:replace="~{${view}}"></main>
+
+  <footer th:replace="~{_t/footer :: footer}"></footer>
+
+  <script th:src="@{/js/input-number-flechas.js}"></script>
+
+  <div th:replace="~{_t/end :: end}"></div>
+
+</body>
+
+</html>

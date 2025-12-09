@@ -1,0 +1,15 @@
+target/
+.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.vscode/settings.json
+.vscode/*.code-workspace
+node_modules
+src/main/resources/static/css/main.css
+.tailwind.pid
+logs

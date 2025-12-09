@@ -1,0 +1,84 @@
+<div class="container mx-auto px-4 py-8" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900" th:text="${session.protectoraLogueada != null ? 'Mis Mascotas' : 'Mascotas'}">Mascotas</h1>
+            <p class="text-gray-600 mt-1" th:text="${session.protectoraLogueada != null ? 'Gestiona las mascotas de tu protectora' : 'Gestiona todas las mascotas disponibles para adopción'}">Gestiona todas las mascotas disponibles para adopción</p>
+        </div>
+        <form th:action="@{/mascota/c}" th:if="${session.protectoraLogueada != null}">
+            <button type="submit"
+                class="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm transition-all duration-200 hover:scale-105">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Nueva Mascota
+            </button>
+        </form>
+    </div>
+
+    <div th:if="${session.rol != null and session.rol.name() == 'ADMIN'}" class="mb-6 bg-white rounded-lg shadow-md p-6">
+        <label for="filtroRaza" class="block text-sm font-semibold text-gray-900 mb-3">
+            <svg class="w-5 h-5 inline mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Buscar mascota
+        </label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M4.41003 16.75C4.17003 19.64 6.35003 22 9.25003 22H14.04C17.3 22 19.54 19.37 19 16.15C18.43 12.77 15.17 10 11.74 10C8.02003 10 4.72003 13.04 4.41003 16.75Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                    <path
+                        d="M10.47 7.5C11.8507 7.5 12.97 6.38071 12.97 5C12.97 3.61929 11.8507 2.5 10.47 2.5C9.08926 2.5 7.96997 3.61929 7.96997 5C7.96997 6.38071 9.08926 7.5 10.47 7.5Z"
+                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <input type="text" id="filtroRaza" placeholder="Nombre, raza, especie..."
+                oninput="filtrarPorRaza()"
+                class="w-full pl-12 pr-4 py-3 text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder:text-gray-400">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                <button type="button" onclick="limpiarFiltro()" id="btnLimpiar"
+                    class="hidden text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                    title="Limpiar filtro">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="resultadosContador" class="mt-3"></div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(mascotas)}" class="bg-white rounded-lg shadow-md p-12 text-center">
+        <svg class="w-20 h-20 mx-auto mb-4 text-gray-300" viewBox="0 0 24 24" fill="none">
+            <path
+                d="M4.41003 16.75C4.17003 19.64 6.35003 22 9.25003 22H14.04C17.3 22 19.54 19.37 19 16.15C18.43 12.77 15.17 10 11.74 10C8.02003 10 4.72003 13.04 4.41003 16.75Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            <path
+                d="M10.47 7.5C11.8507 7.5 12.97 6.38071 12.97 5C12.97 3.61929 11.8507 2.5 10.47 2.5C9.08926 2.5 7.96997 3.61929 7.96997 5C7.96997 6.38071 9.08926 7.5 10.47 7.5Z"
+                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <p class="text-xl font-semibold text-gray-700 mb-2" th:text="${session.protectoraLogueada != null ? 'No tienes mascotas registradas' : 'No hay mascotas registradas'}">No hay mascotas registradas</p>
+        <p class="text-gray-500" th:text="${session.protectoraLogueada != null ? 'Comienza agregando una nueva mascota' : 'No hay mascotas disponibles'}">Comienza agregando una nueva mascota</p>
+    </div>
+
+    <th:block th:if="${!#lists.isEmpty(mascotas)}">
+        <th:block th:if="${session.protectoraLogueada != null}">
+            <div th:replace="~{mascota/tabla-protectora :: content}"></div>
+        </th:block>
+        <th:block th:if="${session.rol != null and session.rol.name() == 'ADMIN'}">
+            <div th:replace="~{mascota/tabla :: content}"></div>
+        </th:block>
+        <th:block th:unless="${session.rol != null and session.rol.name() == 'ADMIN' or session.protectoraLogueada != null}">
+            <div th:replace="~{mascota/cards :: content}"></div>
+        </th:block>
+    </th:block>
+
+</div>
+
+<script th:src="@{/js/filtro-raza.js}"></script>

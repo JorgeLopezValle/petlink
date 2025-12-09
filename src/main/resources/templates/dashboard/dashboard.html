@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PetLink</title>
+</head>
+
+<body class="bg-gray-50">
+    <div class="container mx-auto px-4 py-8">
+        <div>
+            <div class="mb-8">
+                <h1 class="text-4xl font-bold text-gray-800 mb-2">Panel de Administración</h1>
+                <p class="text-gray-600">Resumen general del sistema</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Usuarios</p>
+                            <p class="text-3xl font-bold text-gray-800" th:text="${totalUsuarios}">0</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-full">
+                            <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Protectoras</p>
+                            <p class="text-3xl font-bold text-gray-800" th:text="${totalProtectoras}">0</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-full">
+                            <svg class="w-8 h-8 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Mascotas</p>
+                            <p class="text-3xl font-bold text-gray-800" th:text="${totalMascotas}">0</p>
+                        </div>
+                        <div class="bg-purple-100 p-3 rounded-full">
+                            <svg class="w-8 h-8 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-pink-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Total Adopciones</p>
+                            <p class="text-3xl font-bold text-gray-800" th:text="${totalAdopciones}">0</p>
+                        </div>
+                        <div class="bg-pink-100 p-3 rounded-full">
+                            <svg class="w-8 h-8 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Mascotas Disponibles</p>
+                            <p class="text-3xl font-bold text-gray-800" th:text="${totalMascotasDisponibles}">0</p>
+                        </div>
+                        <div class="bg-yellow-100 p-3 rounded-full">
+                            <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-red-500">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-gray-600 text-sm font-medium">Protectoras Pendientes</p>
+                            <p class="text-3xl font-bold text-gray-800" th:text="${totalProtectorasPendientes}">0</p>
+                        </div>
+                        <div class="bg-red-100 p-3 rounded-full">
+                            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                </path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Últimos Usuarios</h2>
+                    <div class="space-y-3">
+                        <div th:each="usuario : ${ultimosUsuarios}"
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium text-gray-800"
+                                    th:text="${usuario.nombre + ' ' + usuario.apellido}"></p>
+                                <p class="text-sm text-gray-600" th:text="${usuario.email}"></p>
+                            </div>
+                            <span
+                                class="px-2 py-1 text-xs font-medium rounded-full bg-blue-100 text-blue-800"
+                                th:text="${usuario.rol}"></span>
+                        </div>
+                        <div th:if="${#lists.isEmpty(ultimosUsuarios)}" class="text-center text-gray-500 py-4">
+                            No hay usuarios registrados
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Últimas Protectoras</h2>
+                    <div class="space-y-3">
+                        <div th:each="protectora : ${ultimasProtectoras}"
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium text-gray-800" th:text="${protectora.nombre}"></p>
+                                <p class="text-sm text-gray-600" th:text="${protectora.ciudad}"></p>
+                            </div>
+                            <span
+                                th:class="${protectora.aprobado ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}"
+                                class="px-2 py-1 text-xs font-medium rounded-full"
+                                th:text="${protectora.aprobado ? 'Aprobado' : 'Pendiente'}"></span>
+                        </div>
+                        <div th:if="${#lists.isEmpty(ultimasProtectoras)}" class="text-center text-gray-500 py-4">
+                            No hay protectoras registradas
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Últimas Mascotas</h2>
+                    <div class="space-y-3">
+                        <div th:each="mascota : ${ultimasMascotas}"
+                            class="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium text-gray-800" th:text="${mascota.nombre}"></p>
+                                <p class="text-sm text-gray-600" th:text="${mascota.raza}"></p>
+                            </div>
+                            <span
+                                th:class="${mascota.adoptada ? 'bg-pink-100 text-pink-800' : 'bg-green-100 text-green-800'}"
+                                class="px-2 py-1 text-xs font-medium rounded-full"
+                                th:text="${mascota.adoptada ? 'Adoptado' : 'Disponible'}"></span>
+                        </div>
+                        <div th:if="${#lists.isEmpty(ultimasMascotas)}" class="text-center text-gray-500 py-4">
+                            No hay mascotas registradas
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

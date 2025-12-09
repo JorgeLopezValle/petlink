@@ -1,0 +1,164 @@
+<div class="container mx-auto px-4 py-8">
+
+    <div class="flex justify-between items-center mb-6">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Usuarios</h1>
+            <p class="text-gray-600 mt-1">Gestiona los usuarios registrados en el sistema</p>
+        </div>
+        <form th:action="@{/usuario/c}">
+            <button type="submit"
+                class="inline-flex items-center px-6 py-3 text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 shadow-lg shadow-blue-500/50 font-medium rounded-lg text-sm transition-all duration-200 hover:scale-105">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                Nuevo Usuario
+            </button>
+        </form>
+    </div>
+
+    <div class="mb-6 bg-white rounded-lg shadow-md p-6">
+        <label for="filtroNombre" class="block text-sm font-semibold text-gray-900 mb-3">
+            <svg class="w-5 h-5 inline mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+            </svg>
+            Filtrar por nombre
+        </label>
+        <div class="relative">
+            <div class="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none">
+                <svg class="w-5 h-5 text-gray-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4z" />
+                    <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                        d="M6 20c0-2.21 2.69-4 6-4s6 1.79 6 4" />
+                </svg>
+            </div>
+            <input type="text" id="filtroNombre" placeholder="Juan, María, Carlos..."
+                oninput="filtrarPorNombre()"
+                class="w-full pl-12 pr-4 py-3 text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all duration-200 placeholder:text-gray-400">
+            <div class="absolute inset-y-0 right-0 flex items-center pr-4">
+                <button type="button" onclick="limpiarFiltro()" id="btnLimpiar"
+                    class="hidden text-gray-400 hover:text-gray-600 transition-colors duration-200"
+                    title="Limpiar filtro">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="resultadosContador" class="mt-3"></div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full text-sm text-left">
+                <thead
+                    class="text-xs text-gray-700 uppercase bg-gradient-to-r from-gray-50 to-gray-100 border-b-2 border-gray-200">
+                    <tr>
+                        <th class="px-6 py-4 font-semibold">Nombre</th>
+                        <th class="px-6 py-4 font-semibold">Apellidos</th>
+                        <th class="px-6 py-4 font-semibold">Email</th>
+                        <th class="px-6 py-4 font-semibold">Teléfono</th>
+                        <th class="px-6 py-4 font-semibold">Rol</th>
+                        <th class="px-6 py-4 font-semibold text-center">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:if="${#lists.isEmpty(usuarios)}">
+                        <td colspan="6" class="px-6 py-12 text-center text-gray-500">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    d="M12 12c2.21 0 4-1.79 4-4S14.21 4 12 4s-4 1.79-4 4 1.79 4 4 4z" />
+                                <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" d="M6 20c0-2.21 2.69-4 6-4s6 1.79 6 4" />
+                            </svg>
+                            <p class="text-lg font-medium">No hay usuarios registrados</p>
+                            <p class="text-sm mt-1">Comienza agregando un nuevo usuario</p>
+                        </td>
+                    </tr>
+
+                    <tr class="border-b border-gray-200 hover:bg-gray-50 transition-colors duration-150 usuario-row"
+                        th:each="usuario : ${usuarios}" th:object="${usuario}"
+                        th:attr="data-nombre=${usuario.nombre}, data-apellido=${usuario.apellido}, data-email=${usuario.email}">
+                        <td class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white font-bold mr-3">
+                                    <span th:text="${#strings.substring(usuario.nombre, 0, 1)}"></span>
+                                </div>
+                                <span th:text="*{nombre}"></span>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 text-gray-700" th:text="*{apellido}"></td>
+                        <td class="px-6 py-4 text-gray-700" th:text="*{email}"></td>
+                        <td class="px-6 py-4 text-gray-700" th:text="*{telefono}"></td>
+                        <td class="px-6 py-4 text-gray-700 " th:text="*{rol}"></td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center justify-center gap-2">
+                                <a th:href="@{/usuario/u(email=${usuario.email})}"
+                                    class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-blue-700 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors duration-200">
+                                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                                        </path>
+                                    </svg>
+                                    Editar
+                                </a>
+                                <form th:action="@{/usuario/d}" method="POST" class="inline delete-form" th:attr="data-nombre=*{nombre} + ' ' + *{apellido}">
+                                    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                                    <input type="hidden" name="email" th:value="*{email}" />
+                                    <button type="button" onclick="abrirModalEliminar(this.closest('form'))"
+                                        class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-colors duration-200">
+                                        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                            </path>
+                                        </svg>
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="modalEliminarUsuario" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full transform transition-all">
+            <div class="p-6">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">Eliminar Usuario</h3>
+                <p class="text-gray-600 text-center mb-6">
+                    ¿Estás seguro de que quieres eliminar al usuario <span id="nombreUsuario" class="font-semibold text-gray-900"></span>?
+                    <br><span class="text-sm text-red-600 mt-2 block">Esta acción no se puede deshacer.</span>
+                </p>
+                <div class="flex gap-3">
+                    <button type="button" onclick="cerrarModalEliminar()"
+                        class="flex-1 px-4 py-2.5 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors duration-200">
+                        Cancelar
+                    </button>
+                    <button type="button" onclick="confirmarEliminacion()"
+                        class="flex-1 px-4 py-2.5 text-white bg-red-600 hover:bg-red-700 rounded-lg font-medium transition-colors duration-200">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/filtro-nombre.js}"></script>
+<script th:src="@{/js/modal-eliminar-usuario.js}"></script>

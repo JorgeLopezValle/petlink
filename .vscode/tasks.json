@@ -1,0 +1,68 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "npm: install",
+            "type": "shell",
+            "command": "npm install",
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "tailwind: build",
+            "type": "shell",
+            "command": "npm run build",
+            "problemMatcher": [],
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "tailwind: watch",
+            "type": "shell",
+            "command": "npm run watch",
+            "isBackground": true,
+            "problemMatcher": {
+                "owner": "tailwind",
+                "pattern": {
+                    "regexp": "^$"
+                },
+                "background": {
+                    "activeOnStart": true,
+                    "beginsPattern": "Rebuilding...",
+                    "endsPattern": "Done in .*ms\\."
+                }
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "silent",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": false,
+                "clear": false
+            }
+        },
+        {
+            "label": "dev: start all",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "npm: install",
+                "tailwind: build",
+                "tailwind: watch"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}
