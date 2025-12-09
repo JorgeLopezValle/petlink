@@ -42,7 +42,7 @@ pipeline {
                 echo 'Construyendo la imagen Docker'
                 script {
                     def githubUser = "jorgelopezvalle"
-                    def repoName = "petlink-plataforma-adopcion-tfg"
+                    def repoName = "petlink"
                     
                     def image = "ghcr.io/${githubUser}/${repoName}:${env.BUILD_NUMBER}"
                     

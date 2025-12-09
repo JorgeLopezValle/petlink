@@ -170,6 +170,7 @@ git push origin feature/nombre-feature
 ## Documentación Adicional
 
 - [Memoria Proyecto](https://drive.google.com/file/d/10s4MJWA2Vpw7svJ2eHdFCjun46jpxbI4/view?usp=sharing)
+- [Manual de usuario](https://drive.google.com/file/d/1P22mDGx9_7WbYhU7dmFIT2vBQcLGJX4g/view?usp=sharing)
 - [Presentación](https://drive.google.com/file/d/1EbO-Lzb2ZEurcQSfaip7C6-kvihieI-d/view?usp=sharing)
 
 ---
