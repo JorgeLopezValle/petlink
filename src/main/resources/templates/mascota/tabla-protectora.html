@@ -81,11 +81,10 @@
                                     </svg>
                                     Editar
                                 </a>
-                                <form th:if="${!mascota.adoptada}" th:action="@{/mascota/d}" method="POST" class="inline"
-                                    onsubmit="return confirm('¿Estás seguro de que quieres eliminar esta mascota?');">
+                                <form th:if="${!mascota.adoptada}" th:action="@{/mascota/d}" method="POST" class="inline delete-form" th:attr="data-nombre=*{nombre}">
                                     <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
                                     <input type="hidden" name="id" th:value="*{id}" />
-                                    <button type="submit"
+                                    <button type="button" onclick="abrirModalEliminar(this.closest('form'))"
                                         class="inline-flex items-center px-3 py-1.5 text-sm font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-colors duration-200">
                                         <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -103,4 +102,35 @@
             </table>
         </div>
     </div>
+
+    <div id="modalEliminarMascota" class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full transform transition-all">
+            <div class="p-6">
+                <div class="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-red-100 rounded-full">
+                    <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                        </path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-semibold text-gray-900 text-center mb-2">Eliminar Mascota</h3>
+                <p class="text-gray-600 text-center mb-6">
+                    ¿Estás seguro de que quieres eliminar la mascota <span id="nombreMascota" class="font-semibold text-gray-900"></span>?
+                    <br><span class="text-sm text-red-600 mt-2 block">Esta acción no se puede deshacer.</span>
+                </p>
+                <div class="flex gap-3">
+                    <button type="button" onclick="cerrarModalEliminar()"
+                        class="flex-1 px-4 py-2.5 text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-lg font-medium transition-colors duration-200">
+                        Cancelar
+                    </button>
+                    <button type="button" onclick="confirmarEliminacion()"
+                        class="flex-1 px-4 py-2.5 text-white bg-red-600 hover:bg-red-700 rounded-lg font-medium transition-colors duration-200">
+                        Eliminar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{/js/modal-eliminar-mascota.js}"></script>
 </th:block>
